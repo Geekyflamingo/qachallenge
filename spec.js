@@ -16,7 +16,7 @@ describe('Todo Creation :happypath:', function() {
     expect(placeholder).toEqual('What needs to be done?');
   });
 
-  it('should add a todo', function() {
+  it('should add a todo.', function() {
     'Build Doghouse'.split('').forEach((c) => input.sendKeys(c))
     input.sendKeys(protractor.Key.ENTER);
 
@@ -26,12 +26,35 @@ describe('Todo Creation :happypath:', function() {
     expect(todoList.first().getText()).toEqual('Build Doghouse');
   });
 
-  /* TODO
-   Add more happypath tests
-   1. long todos.
-   2. weird characters
-   3. space before string
-  */
+  it('should add a really long todo.', function() {
+    'this is my really really really long todo. I need to buy bananas lots and lots of bananas maybe some strawberries too. Make sure I get enough food for a very very fun party I am having. Let\'s pick up some beer while we are at it. Maybe several kinds'.split('').forEach((c) => input.sendKeys(c))
+    input.sendKeys(protractor.Key.ENTER);
+
+    var todoList = element.all(by.css('.view label'));
+
+    expect(todoList.count()).toEqual(2);
+    expect(todoList.get(1).getText()).toEqual('this is my really really really long todo. I need to buy bananas lots and lots of bananas maybe some strawberries too. Make sure I get enough food for a very very fun party I am having. Let\'s pick up some beer while we are at it. Maybe several kinds');
+  });
+
+  it('should add a todo that has weird characters in it.', function() {
+    '~`!@#%^&*()*}{:;'.split('').forEach((c) => input.sendKeys(c))
+    input.sendKeys(protractor.Key.ENTER);
+
+    var todoList = element.all(by.css('.view label'));
+
+    expect(todoList.count()).toEqual(3);
+    expect(todoList.get(2).getText()).toEqual('~`!@#%^&*()*}{:;');
+  });
+
+  it('should add a todo and strip leading spaces.', function() {
+    ' A space was before this.'.split('').forEach((c) => input.sendKeys(c))
+    input.sendKeys(protractor.Key.ENTER);
+
+    var todoList = element.all(by.css('.view label'));
+
+    expect(todoList.count()).toEqual(4);
+    expect(todoList.get(3).getText()).toEqual('A space was before this.');
+  });
 });
 
 
