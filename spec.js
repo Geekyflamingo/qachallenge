@@ -148,12 +148,15 @@ describe('Todo Edit', function() {
     edit.sendKeys(protractor.Key.ENTER);
 
     expect(todoList.count()).toEqual(5);
-    });
+  });
+});
 
 describe('Todo Destroy', function() {
   beforeEach(function() {
     browser.get('http://todomvc.com/examples/angular2/');
   });
+
+  var input = element(by.css('.new-todo'));
 
   it('should remove todo when clicking on the x', function(){
 
@@ -172,4 +175,39 @@ describe('Todo Destroy', function() {
   });
 });
 
+describe('Checking off Todos', function() {
+  beforeEach(function() {
+    browser.get('http://todomvc.com/examples/angular2/');
+  });
+
+  it('should strike through todo when circle is clicked', function(){
+
+    var todoList = element.all(by.css('.view label'));
+    var first = todoList.first();
+    var toggle = element.all(by.css('.toggle')).first()
+
+    expect(todoList.count()).toEqual(5);
+
+    browser.actions().click(toggle).perform();
+
+    expect(element.all(by.css('.todo-list li')).first().getAttribute('class')).toBe('completed');
+
+    expect(element.all(by.css('.completed label')).first().getCssValue('text-decoration')).toEqual('line-through');
+
+  });
+
+  it('should unstrike todo when circle is clicked when already selected ', function(){
+
+    var todoList = element.all(by.css('.view label'));
+    var first = todoList.first();
+    var toggle = element.all(by.css('.toggle')).first()
+
+    expect(todoList.count()).toEqual(5);
+
+    browser.actions().click(toggle).perform();
+
+    expect(element.all(by.css('.todo-list li')).first().getAttribute('class')).not.toBe('completed');
+    expect(element.all(by.css('.view label')).first().getCssValue('text-decoration')).toEqual('none');
+
+  });
 });
