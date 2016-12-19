@@ -211,3 +211,43 @@ describe('Checking off Todos', function() {
 
   });
 });
+
+describe('Clearing completed todos', function() {
+  beforeEach(function() {
+    browser.get('http://todomvc.com/examples/angular2/');
+  });
+
+  it('should show how many more items are left', function(){
+
+    var todoList = element.all(by.css('.view label'));
+    var first = todoList.first();
+    var toggle = element.all(by.css('.toggle')).first()
+
+    expect(todoList.count()).toEqual(5);
+    expect(element(by.css('.todo-count')).getText()).toEqual('5 items left')
+
+    browser.actions().click(toggle).perform();
+
+    expect(element.all(by.css('.todo-list li')).first().getAttribute('class')).toBe('completed');
+
+    expect(element.all(by.css('.completed label')).first().getCssValue('text-decoration')).toEqual('line-through');
+
+    expect(element(by.css('.todo-count')).getText()).toEqual('4 items left')
+
+  });
+
+  // it('should unstrike todo when circle is clicked when already selected ', function(){
+  //
+  //   var todoList = element.all(by.css('.view label'));
+  //   var first = todoList.first();
+  //   var toggle = element.all(by.css('.toggle')).first()
+  //
+  //   expect(todoList.count()).toEqual(5);
+  //
+  //   browser.actions().click(toggle).perform();
+  //
+  //   expect(element.all(by.css('.todo-list li')).first().getAttribute('class')).not.toBe('completed');
+  //   expect(element.all(by.css('.view label')).first().getCssValue('text-decoration')).toEqual('none');
+  //
+  // });
+});
