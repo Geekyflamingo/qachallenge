@@ -1,4 +1,3 @@
-// spec.j
 describe('Todo Creation :happypath:', function() {
   beforeEach(function() {
     browser.get('http://todomvc.com/examples/angular2/');
@@ -217,7 +216,7 @@ describe('Clearing completed todos', function() {
     browser.get('http://todomvc.com/examples/angular2/');
   });
 
-  it('should show how many more items are left', function(){
+  it('should show how many more items are left to be completed', function(){
 
     var todoList = element.all(by.css('.view label'));
     var first = todoList.first();
@@ -236,18 +235,90 @@ describe('Clearing completed todos', function() {
 
   });
 
-  // it('should unstrike todo when circle is clicked when already selected ', function(){
-  //
-  //   var todoList = element.all(by.css('.view label'));
-  //   var first = todoList.first();
-  //   var toggle = element.all(by.css('.toggle')).first()
-  //
-  //   expect(todoList.count()).toEqual(5);
-  //
-  //   browser.actions().click(toggle).perform();
-  //
-  //   expect(element.all(by.css('.todo-list li')).first().getAttribute('class')).not.toBe('completed');
-  //   expect(element.all(by.css('.view label')).first().getCssValue('text-decoration')).toEqual('none');
-  //
-  // });
+  it('should select all todos as completed when triangle is clicked', function(){
+
+    var todoList = element.all(by.css('.view label'));
+    var first = todoList.first();
+    var toggleAll = element(by.css('.toggle-all'));
+
+    expect(todoList.count()).toEqual(5);
+
+    browser.actions().click(toggleAll).perform();
+
+    var list = element.all(by.css('.todo-list li'))
+    for (c = 0; c< list.count-1; c++){ expect(list.get(c).getAttribute('class')).toBe('completed') };
+    var strikes = element.all(by.css('.view label'))
+    for(c = 0; c< strikes.count-1; c++){ expect(strikes.get(c).getCssValue('text-decoration')).toEqual('line-through') };
+
+    expect(element(by.css('.todo-count')).getText()).toEqual('0 items left');
+
+  });
+
+  it('should unselect all todos as completed when triangle is clicked', function(){
+
+    var todoList = element.all(by.css('.view label'));
+    var first = todoList.first();
+    var toggleAll = element(by.css('.toggle-all'));
+
+    expect(todoList.count()).toEqual(5);
+
+    browser.actions().click(toggleAll).perform();
+
+    var list = element.all(by.css('.todo-list li'))
+    for (c = 0; c< list.count-1; c++){ expect(list.get(c).getAttribute('class')).not.toBe('completed') };
+    var strikes = element.all(by.css('.view label'))
+    for(c = 0; c< strikes.count-1; c++){ expect(strikes.get(c).getCssValue('text-decoration')).toEqual('none') };
+
+    expect(element(by.css('.todo-count')).getText()).toEqual('5 items left')
+  });
+
+  it('should clear completed todos when \'Clear Completed\' is clicked', function(){
+
+    var todoList = element.all(by.css('.view label'));
+    var first = todoList.first();
+    var togglefirst = element.all(by.css('.toggle')).first();
+    var togglesecond = element.all(by.css('.toggle')).get(2);
+    var togglelast = element.all(by.css('.toggle')).last();
+
+    expect(todoList.count()).toEqual(5);
+
+    browser.actions().click(togglefirst).perform();
+    browser.actions().click(togglesecond).perform();
+    browser.actions().click(togglelast).perform();
+
+    var list = element.all(by.css('.todo-list li'))
+    for (c = 0; c< list.count-1; c++){ expect(list.get(c).getAttribute('class')).toBe('completed') };
+    var strikes = element.all(by.css('.view label'))
+    for(c = 0; c< strikes.count-1; c++){ expect(strikes.get(c).getCssValue('text-decoration')).toEqual('line-through') };
+
+    expect(element(by.css('.todo-count')).getText()).toEqual('2 items left');
+
+    browser.actions().click(element(by.css('.clear-completed'))).perform();
+
+    expect(element(by.css('.todoapp'))).not.toContain(todoList);
+
+  });
+
+  it('should select all todos as completed when triangle is clicked and then remove them all when \'Clear Completed\' is clicked', function(){
+
+    var todoList = element.all(by.css('.view label'));
+    var first = todoList.first();
+    var toggleAll = element(by.css('.toggle-all'));
+
+    expect(todoList.count()).toEqual(2);
+
+    browser.actions().click(toggleAll).perform();
+
+    var list = element.all(by.css('.todo-list li'))
+    for (c = 0; c< list.count-1; c++){ expect(list.get(c).getAttribute('class')).toBe('completed') };
+    var strikes = element.all(by.css('.view label'))
+    for(c = 0; c< strikes.count-1; c++){ expect(strikes.get(c).getCssValue('text-decoration')).toEqual('line-through') };
+
+    expect(element(by.css('.todo-count')).getText()).toEqual('0 items left');
+
+    browser.actions().click(element(by.css('.clear-completed'))).perform();
+
+    expect(element(by.css('.todoapp'))).not.toContain(todoList);
+
+  });
 });
