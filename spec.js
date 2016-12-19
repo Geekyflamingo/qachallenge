@@ -1,8 +1,8 @@
-describe('Todo Creation :happypath:', function() {
   beforeEach(function() {
     browser.get('http://todomvc.com/examples/angular2/');
   });
 
+describe('Todo Creation :happypath:', function() {
   var input = element(by.css('.new-todo'));
 
   it('should have an empty input when first hitting the page', function() {
@@ -58,10 +58,6 @@ describe('Todo Creation :happypath:', function() {
 
 
 describe('Todo Creation :sadpath:', function() {
-  beforeEach(function() {
-    browser.get('http://todomvc.com/examples/angular2/');
-  });
-
   var input = element(by.css('.new-todo'));
 
   it('should not add a todo when input is blank', function() {
@@ -84,10 +80,6 @@ describe('Todo Creation :sadpath:', function() {
 });
 
 describe('Todo Edit', function() {
-  beforeEach(function() {
-    browser.get('http://todomvc.com/examples/angular2/');
-  });
-
   var input = element(by.css('.new-todo'));
 
   it('should be able to edit and add characters a todo.', function(){
@@ -151,10 +143,6 @@ describe('Todo Edit', function() {
 });
 
 describe('Todo Destroy', function() {
-  beforeEach(function() {
-    browser.get('http://todomvc.com/examples/angular2/');
-  });
-
   var input = element(by.css('.new-todo'));
 
   it('should remove todo when clicking on the x', function(){
@@ -175,10 +163,6 @@ describe('Todo Destroy', function() {
 });
 
 describe('Checking off Todos', function() {
-  beforeEach(function() {
-    browser.get('http://todomvc.com/examples/angular2/');
-  });
-
   it('should strike through todo when circle is clicked', function(){
 
     var todoList = element.all(by.css('.view label'));
@@ -212,10 +196,6 @@ describe('Checking off Todos', function() {
 });
 
 describe('Clearing completed todos', function() {
-  beforeEach(function() {
-    browser.get('http://todomvc.com/examples/angular2/');
-  });
-
   it('should show how many more items are left to be completed', function(){
 
     var todoList = element.all(by.css('.view label'));
