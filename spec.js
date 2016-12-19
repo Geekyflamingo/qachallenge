@@ -82,6 +82,94 @@ describe('Todo Creation :sadpath:', function() {
     var todoList = element(by.css('.todo-list'));
     expect(element(by.css('.todoapp'))).not.toContain(todoList);
   });
+});
 
+describe('Todo Edit', function() {
+  beforeEach(function() {
+    browser.get('http://todomvc.com/examples/angular2/');
+  });
+
+  var input = element(by.css('.new-todo'));
+
+  it('should be able to edit and add characters a todo.', function(){
+
+    'Edit me'.split('').forEach((c) => input.sendKeys(c))
+    input.sendKeys(protractor.Key.ENTER);
+
+    var todoList = element.all(by.css('.view label'));
+    var fourth = todoList.get(4);
+    expect(todoList.count()).toEqual(5);
+
+    browser.actions().doubleClick(fourth).perform();
+    var edit = element(by.css('.edit'));
+    browser.actions().click(edit).perform();
+
+    ' please'.split('').forEach((c) => edit.sendKeys(c))
+    edit.sendKeys(protractor.Key.ENTER);
+
+    expect(fourth.getText()).toEqual('Edit me please');
+  });
+
+  it('should be able to edit and completely change a todo.', function(){
+
+    var todoList = element.all(by.css('.view label'));
+    var fourth = todoList.get(4);
+    var text = fourth.getText().toString();
+
+    browser.actions().doubleClick(fourth).perform();
+    var edit = element(by.css('.edit'));
+    browser.actions().click(edit).perform();
+
+    text.split('').forEach((c) => edit.sendKeys(protractor.Key.BACK_SPACE));
+
+    'My edited todo'.split('').forEach((c) => edit.sendKeys(c))
+    edit.sendKeys(protractor.Key.ENTER);
+
+    expect(fourth.getText()).toEqual('My edited todo');
+  });
+
+  it('should be remove a todo when you edit it to have an empty string.', function(){
+
+    'Delete me through edit'.split('').forEach((c) => input.sendKeys(c))
+    input.sendKeys(protractor.Key.ENTER);
+
+    var todoList = element.all(by.css('.view label'));
+    var fifth = todoList.get(5);
+    var text = fifth.getText().toString();
+
+    expect(todoList.count()).toEqual(6);
+
+    browser.actions().doubleClick(fifth).perform();
+
+    var edit = element(by.css('.edit'));
+
+    edit.clear();
+
+    edit.sendKeys(protractor.Key.ENTER);
+
+    expect(todoList.count()).toEqual(5);
+    });
+
+describe('Todo Destroy', function() {
+  beforeEach(function() {
+    browser.get('http://todomvc.com/examples/angular2/');
+  });
+
+  it('should remove todo when clicking on the x', function(){
+
+    'Delete me'.split('').forEach((c) => input.sendKeys(c))
+    input.sendKeys(protractor.Key.ENTER);
+
+    var todoList = element.all(by.css('.view label'));
+    var fifth = todoList.get(5);
+
+    expect(todoList.count()).toEqual(6);
+
+    browser.actions().mouseMove(fifth).perform();
+    element.all(by.css('.destroy')).get(5).click();
+
+    expect(todoList.count()).toEqual(5);
+  });
+});
 
 });
