@@ -16,7 +16,7 @@ describe('Todo Creation :happypath:', function() {
   });
 
   it('should add a todo.', function() {
-    'Build Doghouse'.split('').forEach((c) => input.sendKeys(c))
+    'Build Doghouse'.split('').forEach((c) => input.sendKeys(c));
     input.sendKeys(protractor.Key.ENTER);
 
     var todoList = element.all(by.css('.view label'));
@@ -26,7 +26,7 @@ describe('Todo Creation :happypath:', function() {
   });
 
   it('should add a really long todo.', function() {
-    'this is my really really really long todo. I need to buy bananas lots and lots of bananas maybe some strawberries too. Make sure I get enough food for a very very fun party I am having. Let\'s pick up some beer while we are at it. Maybe several kinds'.split('').forEach((c) => input.sendKeys(c))
+    'this is my really really really long todo. I need to buy bananas lots and lots of bananas maybe some strawberries too. Make sure I get enough food for a very very fun party I am having. Let\'s pick up some beer while we are at it. Maybe several kinds'.split('').forEach((c) => input.sendKeys(c));
     input.sendKeys(protractor.Key.ENTER);
 
     var todoList = element.all(by.css('.view label'));
@@ -36,7 +36,7 @@ describe('Todo Creation :happypath:', function() {
   });
 
   it('should add a todo that has weird characters in it.', function() {
-    '~`!@#%^&*()*}{:;'.split('').forEach((c) => input.sendKeys(c))
+    '~`!@#%^&*()*}{:;'.split('').forEach((c) => input.sendKeys(c));
     input.sendKeys(protractor.Key.ENTER);
 
     var todoList = element.all(by.css('.view label'));
@@ -46,7 +46,7 @@ describe('Todo Creation :happypath:', function() {
   });
 
   it('should add a todo and strip leading spaces.', function() {
-    ' A space was before this.'.split('').forEach((c) => input.sendKeys(c))
+    ' A space was before this.'.split('').forEach((c) => input.sendKeys(c));
     input.sendKeys(protractor.Key.ENTER);
 
     var todoList = element.all(by.css('.view label'));
@@ -92,7 +92,7 @@ describe('Todo Edit', function() {
 
   it('should be able to edit and add characters a todo.', function(){
 
-    'Edit me'.split('').forEach((c) => input.sendKeys(c))
+    'Edit me'.split('').forEach((c) => input.sendKeys(c));
     input.sendKeys(protractor.Key.ENTER);
 
     var todoList = element.all(by.css('.view label'));
@@ -103,7 +103,7 @@ describe('Todo Edit', function() {
     var edit = element(by.css('.edit'));
     browser.actions().click(edit).perform();
 
-    ' please'.split('').forEach((c) => edit.sendKeys(c))
+    ' please'.split('').forEach((c) => edit.sendKeys(c));
     edit.sendKeys(protractor.Key.ENTER);
 
     expect(fourth.getText()).toEqual('Edit me please');
@@ -121,7 +121,7 @@ describe('Todo Edit', function() {
 
     text.split('').forEach((c) => edit.sendKeys(protractor.Key.BACK_SPACE));
 
-    'My edited todo'.split('').forEach((c) => edit.sendKeys(c))
+    'My edited todo'.split('').forEach((c) => edit.sendKeys(c));
     edit.sendKeys(protractor.Key.ENTER);
 
     expect(fourth.getText()).toEqual('My edited todo');
@@ -129,7 +129,7 @@ describe('Todo Edit', function() {
 
   it('should be remove a todo when you edit it to have an empty string.', function(){
 
-    'Delete me through edit'.split('').forEach((c) => input.sendKeys(c))
+    'Delete me through edit'.split('').forEach((c) => input.sendKeys(c));
     input.sendKeys(protractor.Key.ENTER);
 
     var todoList = element.all(by.css('.view label'));
@@ -159,7 +159,7 @@ describe('Todo Destroy', function() {
 
   it('should remove todo when clicking on the x', function(){
 
-    'Delete me'.split('').forEach((c) => input.sendKeys(c))
+    'Delete me'.split('').forEach((c) => input.sendKeys(c));
     input.sendKeys(protractor.Key.ENTER);
 
     var todoList = element.all(by.css('.view label'));
@@ -183,7 +183,7 @@ describe('Checking off Todos', function() {
 
     var todoList = element.all(by.css('.view label'));
     var first = todoList.first();
-    var toggle = element.all(by.css('.toggle')).first()
+    var toggle = element.all(by.css('.toggle')).first();
 
     expect(todoList.count()).toEqual(5);
 
@@ -199,7 +199,7 @@ describe('Checking off Todos', function() {
 
     var todoList = element.all(by.css('.view label'));
     var first = todoList.first();
-    var toggle = element.all(by.css('.toggle')).first()
+    var toggle = element.all(by.css('.toggle')).first();
 
     expect(todoList.count()).toEqual(5);
 
@@ -220,10 +220,10 @@ describe('Clearing completed todos', function() {
 
     var todoList = element.all(by.css('.view label'));
     var first = todoList.first();
-    var toggle = element.all(by.css('.toggle')).first()
+    var toggle = element.all(by.css('.toggle')).first();
 
     expect(todoList.count()).toEqual(5);
-    expect(element(by.css('.todo-count')).getText()).toEqual('5 items left')
+    expect(element(by.css('.todo-count')).getText()).toEqual('5 items left');
 
     browser.actions().click(toggle).perform();
 
@@ -231,7 +231,7 @@ describe('Clearing completed todos', function() {
 
     expect(element.all(by.css('.completed label')).first().getCssValue('text-decoration')).toEqual('line-through');
 
-    expect(element(by.css('.todo-count')).getText()).toEqual('4 items left')
+    expect(element(by.css('.todo-count')).getText()).toEqual('4 items left');
 
   });
 
@@ -245,9 +245,9 @@ describe('Clearing completed todos', function() {
 
     browser.actions().click(toggleAll).perform();
 
-    var list = element.all(by.css('.todo-list li'))
+    var list = element.all(by.css('.todo-list li'));
     for (c = 0; c< list.count-1; c++){ expect(list.get(c).getAttribute('class')).toBe('completed') };
-    var strikes = element.all(by.css('.view label'))
+    var strikes = element.all(by.css('.view label'));
     for(c = 0; c< strikes.count-1; c++){ expect(strikes.get(c).getCssValue('text-decoration')).toEqual('line-through') };
 
     expect(element(by.css('.todo-count')).getText()).toEqual('0 items left');
@@ -264,12 +264,12 @@ describe('Clearing completed todos', function() {
 
     browser.actions().click(toggleAll).perform();
 
-    var list = element.all(by.css('.todo-list li'))
+    var list = element.all(by.css('.todo-list li'));
     for (c = 0; c< list.count-1; c++){ expect(list.get(c).getAttribute('class')).not.toBe('completed') };
-    var strikes = element.all(by.css('.view label'))
+    var strikes = element.all(by.css('.view label'));
     for(c = 0; c< strikes.count-1; c++){ expect(strikes.get(c).getCssValue('text-decoration')).toEqual('none') };
 
-    expect(element(by.css('.todo-count')).getText()).toEqual('5 items left')
+    expect(element(by.css('.todo-count')).getText()).toEqual('5 items left');
   });
 
   it('should clear completed todos when \'Clear Completed\' is clicked', function(){
@@ -286,9 +286,9 @@ describe('Clearing completed todos', function() {
     browser.actions().click(togglesecond).perform();
     browser.actions().click(togglelast).perform();
 
-    var list = element.all(by.css('.todo-list li'))
+    var list = element.all(by.css('.todo-list li'));
     for (c = 0; c< list.count-1; c++){ expect(list.get(c).getAttribute('class')).toBe('completed') };
-    var strikes = element.all(by.css('.view label'))
+    var strikes = element.all(by.css('.view label'));
     for(c = 0; c< strikes.count-1; c++){ expect(strikes.get(c).getCssValue('text-decoration')).toEqual('line-through') };
 
     expect(element(by.css('.todo-count')).getText()).toEqual('2 items left');
@@ -309,9 +309,9 @@ describe('Clearing completed todos', function() {
 
     browser.actions().click(toggleAll).perform();
 
-    var list = element.all(by.css('.todo-list li'))
+    var list = element.all(by.css('.todo-list li'));
     for (c = 0; c< list.count-1; c++){ expect(list.get(c).getAttribute('class')).toBe('completed') };
-    var strikes = element.all(by.css('.view label'))
+    var strikes = element.all(by.css('.view label'));
     for(c = 0; c< strikes.count-1; c++){ expect(strikes.get(c).getCssValue('text-decoration')).toEqual('line-through') };
 
     expect(element(by.css('.todo-count')).getText()).toEqual('0 items left');
