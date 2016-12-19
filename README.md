@@ -10,7 +10,7 @@ This is a repo that tests the UI for the site http://todomvc.com/examples/angula
 ## Test cases:
 
 | Test Case ID  | Test Scenario | Test Steps | Test Data | Expected | Actual | Pass/Fail |
-|:-------------:|:-------------:|:----------:|:---------:|:--------:|:------:|:---------:|
+|:-------------:|:-------------:|:----------|:---------:|:--------:|:------:|:---------:|
 | T001		| Create Todo :happypath: | <ol><li>Go to site (http://todomvc.com/examples/angular2/)</li><li>Click on input.</li><li>Type a todo.</li><li>Hit ENTER</li></ol> |
 | T002	      	| Create Todo :sadpath:      |  <ol><li>Go to site (http://todomvc.com/examples/angular2/)</li><li>Click on input.</li><li>Hit ENTER</li><li>Hit space</li><li>Hit ENTER</li></ol> |
 | T003          | Edit a Todo      |    <ol> <li> Test case T001</li> <li> Double Click on a todo</li> <li> Click on todo</li> <li> change input</li> <li> Hit ENTER</li></ol>|
