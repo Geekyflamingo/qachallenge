@@ -1,0 +1,22 @@
+{
+  "name": "qachallenge",
+  "version": "1.0.0",
+  "description": "testing in angular 2.0",
+  "main": "conf.js",
+  "dependencies": {
+    "protractor": "^4.0.13"
+  },
+  "scripts": {
+    "test": "protractor"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Geekyflamingo/qachallenge.git"
+  },
+  "author": "Rebecca Vasil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Geekyflamingo/qachallenge/issues"
+  },
+  "homepage": "https://github.com/Geekyflamingo/qachallenge#readme"
+}
