@@ -1,4 +1,4 @@
-## QA Challenge
+# QA Challenge
 This is a repo that tests the UI for the site http://todomvc.com/examples/angular2/. Author issues and bugs are found under issues in github.
 
 ## Installation:
